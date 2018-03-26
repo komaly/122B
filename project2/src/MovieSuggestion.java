@@ -6,14 +6,11 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-import javax.naming.Context;
-import javax.naming.InitialContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.sql.DataSource;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -45,6 +42,11 @@ public class MovieSuggestion extends HttpServlet {
 			
 			// get the query string from parameter
 			String query = request.getParameter("query");
+        
+			String loginUser = "root";
+	        String loginPasswd = "MySQLPassword123";
+	        String loginUrl = "jdbc:mysql://localhost:3306/moviedb";
+	        
 			
 			// return the empty json array if query is null or empty
 			if (query == null || query.trim().isEmpty()) {
@@ -53,21 +55,8 @@ public class MovieSuggestion extends HttpServlet {
 			}	
 		    String[] qArray = query.trim().split("\\s+");
 			
-			Context initCtx = new InitialContext();
-            if (initCtx == null)
-                response.getWriter().println("initCtx is NULL");
-
-            Context envCtx = (Context) initCtx.lookup("java:comp/env");
-            if (envCtx == null)
-            	response.getWriter().println("envCtx is NULL");
-
-            // Look up our data source
-            DataSource ds = (DataSource) envCtx.lookup("jdbc/TestDB");
-
-            if (ds == null)
-            	response.getWriter().println("ds is null.");
-
-            Connection dbcon = ds.getConnection();
+			Class.forName("com.mysql.jdbc.Driver").newInstance();
+	        Connection dbcon = DriverManager.getConnection(loginUrl, loginUser, loginPasswd);
 	  
 	        PreparedStatement statement, statement2;
 	        ResultSet rs, rs2;
@@ -105,10 +94,6 @@ public class MovieSuggestion extends HttpServlet {
        
 			
 			response.getWriter().write(jsonArray.toString());
-			
-			 dbcon.close();
-	         rs.close();
-	         rs2.close();
 			return;
 		} catch (Exception e) {
 			System.out.println(e);

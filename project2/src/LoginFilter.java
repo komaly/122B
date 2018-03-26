@@ -40,12 +40,6 @@ public class LoginFilter implements Filter {
 		
 		System.out.println("LoginFilter: " + httpRequest.getRequestURI());
 		
-//		if (httpRequest.getRequestURI().toLowerCase().contains("movielist.jsp"))
-//		{
-//			chain.doFilter(request, response);
-//			return;
-//		}
-//		
 		// check if this URL is allowed to access without logging in
 		if (this.isUrlAllowedWithoutLogin(httpRequest.getRequestURI())) {
 			// keep default action: pass along the filter chain
@@ -62,7 +56,6 @@ public class LoginFilter implements Filter {
 				return;
 			}
 			
-		
 			httpResponse.sendRedirect("/project2/login.html");
 			return;
 		} else {
@@ -81,7 +74,7 @@ public class LoginFilter implements Filter {
 		if (requestURI.endsWith("login.html") || requestURI.endsWith("login.js") 
 				|| requestURI.endsWith("login") || requestURI.endsWith("like-predicate.jsp")
 				|| requestURI.endsWith("_dashboard.html") || requestURI.endsWith("employeelogin.js")
-				||  requestURI.endsWith("employeeMain.html") ||  requestURI.contains("movieList.jsp")) {
+				||  requestURI.endsWith("employeeMain.html")) {
 			return true;
 		}
 		return false;

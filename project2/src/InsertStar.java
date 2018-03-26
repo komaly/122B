@@ -7,14 +7,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.Random;
 
-import javax.naming.Context;
-import javax.naming.InitialContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.sql.DataSource;
 
 /**
  * Servlet implementation class InsertStar
@@ -39,7 +36,9 @@ public class InsertStar extends HttpServlet {
 		response.setContentType("text/html");
         response.getWriter().println("<link rel='stylesheet' href='/project2/styles.css' type='text/css' media='all'/>");  
         response.getWriter().println("<HEAD><TITLE>Star Inserted </TITLE></HEAD>");
-	
+		String loginUser = "root";
+        String loginPasswd = "MySQLPassword123";
+        String loginUrl = "jdbc:mysql://localhost:3306/moviedb";
         String name = request.getParameter("name");
         String birthyear = request.getParameter("birthyear");
         
@@ -66,21 +65,8 @@ public class InsertStar extends HttpServlet {
        
        try
        {
-    	   Context initCtx = new InitialContext();
-           if (initCtx == null)
-               response.getWriter().println("initCtx is NULL");
-
-           Context envCtx = (Context) initCtx.lookup("java:comp/env");
-           if (envCtx == null)
-           	response.getWriter().println("envCtx is NULL");
-
-           // Look up our data source
-           DataSource ds = (DataSource) envCtx.lookup("jdbc/MasterDB");
-
-           if (ds == null)
-           	response.getWriter().println("ds is null.");
-
-           Connection dbcon = ds.getConnection();
+    	   Class.forName("com.mysql.jdbc.Driver").newInstance();
+           Connection dbcon = DriverManager.getConnection(loginUrl, loginUser, loginPasswd);
            
            Random rand = new Random();
            String id = "";
@@ -157,10 +143,6 @@ public class InsertStar extends HttpServlet {
 	       response.getWriter().println("<a href='employeeMain.html' title='EmployeeMain'>"
               		+ "<button style='height:35px;width:100px'>Back to Main Page</button>"
               		+ "</a>");
-	       
-	       dbcon.close();
-	       rs2.close();
-	       rs3.close();
 
        }
        catch(Exception e)

@@ -1,16 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-
-<%@page import="java.util.List"%>
-<%@page import="java.util.ArrayList"%>
-<%@page import="java.util.Arrays"%>
-<%@page import="java.sql.PreparedStatement"%>
-<%@page import="java.sql.ResultSet"%>
-<%@page import="java.sql.Connection"%>
-<%@page import="javax.naming.InitialContext"%>
-<%@page import="javax.naming.Context"%>
-<%@page import="javax.sql.DataSource"%>
-
+<%@page import="java.sql.*"%>
+<%@page import="com.mysql.jdbc.*"%>
+<%@page import="java.util.*"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -49,23 +41,11 @@ tr {background-color: white;}
 </thead>
 <tbody>
 <%
-Context initCtx = new InitialContext();
-if (initCtx == null)
-    response.getWriter().println("initCtx is NULL");
+Connection con = null;
+Class.forName("com.mysql.jdbc.Driver");
+con = (Connection)DriverManager.getConnection("jdbc:mysql://localhost:3306/moviedb?autoReconnect=true&useSSL=false", "root", "MySQLPassword123");
 
-Context envCtx = (Context) initCtx.lookup("java:comp/env");
-if (envCtx == null)
-	response.getWriter().println("envCtx is NULL");
-
-// Look up our data source
-DataSource ds = (DataSource) envCtx.lookup("jdbc/TestDB");
-
-if (ds == null)
-	response.getWriter().println("ds is null.");
-
-Connection dbcon = ds.getConnection();
-
-PreparedStatement ps= dbcon.prepareStatement(
+PreparedStatement ps=(PreparedStatement)con.prepareStatement(
 		"select distinct(m.title) as mt, m.year, m.director, m.id, GROUP_CONCAT(DISTINCT(g.name)) AS genres_list, GROUP_CONCAT(DISTINCT(s.name)) AS stars_list "
 		+"from movies as m "
 		+"inner join stars_in_movies as sm on m.id = sm.movieId "
@@ -136,8 +116,6 @@ while(rs.next()){
 	</tr>
 <% 
 }
-dbcon.close();
-rs.close();
 %>
 </tbody>
 

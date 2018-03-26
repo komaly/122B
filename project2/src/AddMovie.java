@@ -1,4 +1,4 @@
-//TESTING12345
+//TESTING
 
 import java.io.IOException;
 import java.sql.CallableStatement;
@@ -7,14 +7,11 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-import javax.naming.Context;
-import javax.naming.InitialContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.sql.DataSource;
 
 /**
  * Servlet implementation class AddMovie
@@ -39,6 +36,9 @@ public class AddMovie extends HttpServlet {
 		response.setContentType("text/html");
         response.getWriter().println("<link rel='stylesheet' href='/project2/styles.css' type='text/css' media='all'/>");  
         
+        String loginUser = "root";
+        String loginPasswd = "MySQLPassword123";
+        String loginUrl = "jdbc:mysql://localhost:3306/moviedb?autoReconnect=true&useSSL=false";
         String title = request.getParameter("title");
         String year = request.getParameter("year");
         String director = request.getParameter("director");
@@ -75,22 +75,9 @@ public class AddMovie extends HttpServlet {
         
         try
         {
-        	Context initCtx = new InitialContext();
-            if (initCtx == null)
-                response.getWriter().println("initCtx is NULL");
-
-            Context envCtx = (Context) initCtx.lookup("java:comp/env");
-            if (envCtx == null)
-            	response.getWriter().println("envCtx is NULL");
-
-            // Look up our data source
-            DataSource ds = (DataSource) envCtx.lookup("jdbc/MasterDB");
-
-            if (ds == null)
-            	response.getWriter().println("ds is null.");
-
-            Connection dbcon = ds.getConnection();
-            CallableStatement cs = dbcon.prepareCall("{call add_movie (?,?,?,?,?)}");
+        	 Class.forName("com.mysql.jdbc.Driver").newInstance();
+             Connection dbcon = DriverManager.getConnection(loginUrl, loginUser, loginPasswd);
+             CallableStatement cs = dbcon.prepareCall("{call add_movie (?,?,?,?,?)}");
 
              cs.setString(1, title);
              cs.setString(2, year);
@@ -128,9 +115,7 @@ public class AddMovie extends HttpServlet {
                		+ "<button style='height:35px;width:100px'>Back to Main Page</button>"
                		+ "</a>");
 
- 	       dbcon.close();
- 	       rs.close();
- 	       cs.close();
+             
         }
         catch(Exception e)
         {

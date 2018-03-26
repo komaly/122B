@@ -7,14 +7,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 
-import javax.naming.Context;
-import javax.naming.InitialContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.sql.DataSource;
 
 /**
  * Servlet implementation class ViewMetaData
@@ -40,26 +37,15 @@ public class ViewMetaData extends HttpServlet {
 		response.setContentType("text/html");
         response.getWriter().println("<HEAD><TITLE>View Database MetaData </TITLE></HEAD>");
         response.getWriter().println("<link rel='stylesheet' href='/project2/styles.css' type='text/css' media='all'/>");       
-		
+		String loginUser = "root";
+        String loginPasswd = "MySQLPassword123";
+        String loginUrl = "jdbc:mysql://localhost:3306/moviedb?autoReconnect=true&useSSL=false";
         response.getWriter().println("<BODY><H1>MetaData of Database</H1>");
         
         try
         {
-        	Context initCtx = new InitialContext();
-            if (initCtx == null)
-                response.getWriter().println("initCtx is NULL");
-
-            Context envCtx = (Context) initCtx.lookup("java:comp/env");
-            if (envCtx == null)
-            	response.getWriter().println("envCtx is NULL");
-
-            // Look up our data source
-            DataSource ds = (DataSource) envCtx.lookup("jdbc/TestDB");
-
-            if (ds == null)
-            	response.getWriter().println("ds is null.");
-
-            Connection dbcon = ds.getConnection();
+        	Class.forName("com.mysql.jdbc.Driver").newInstance();
+            Connection dbcon = DriverManager.getConnection(loginUrl, loginUser, loginPasswd);
             
             PreparedStatement statement1 = dbcon.prepareStatement("SELECT * FROM creditcards");
             ResultSet rs1 = statement1.executeQuery();
@@ -204,8 +190,6 @@ public class ViewMetaData extends HttpServlet {
             response.getWriter().println("<a href='employeeMain.html' title='EmployeeMain'>"
                		+ "<button style='height:35px;width:100px'>Back to Main Page</button>"
                		+ "</a>");
-            
-            dbcon.close();
         }
         catch(Exception e)
         {

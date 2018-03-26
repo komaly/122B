@@ -1,15 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-
-<%@page import="java.util.List"%>
-<%@page import="java.util.ArrayList"%>
-<%@page import="java.util.Arrays"%>
-<%@page import="java.sql.PreparedStatement"%>
-<%@page import="java.sql.ResultSet"%>
-<%@page import="java.sql.Connection"%>
-<%@page import="javax.naming.InitialContext"%>
-<%@page import="javax.naming.Context"%>
-<%@page import="javax.sql.DataSource"%>
+<%@page import="java.sql.*"%>
+<%@page import="com.mysql.jdbc.*"%>
+<%@page import="java.util.*"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -47,21 +40,11 @@
 <%
 try
 {
-	Context initCtx = new InitialContext();
-    if (initCtx == null)
-        response.getWriter().println("initCtx is NULL");
-
-    Context envCtx = (Context) initCtx.lookup("java:comp/env");
-    if (envCtx == null)
-    	response.getWriter().println("envCtx is NULL");
-
-    // Look up our data source
-    DataSource ds = (DataSource) envCtx.lookup("jdbc/TestDB");
-
-    if (ds == null)
-    	response.getWriter().println("ds is null.");
-
-    Connection dbcon = ds.getConnection();
+	String loginUser = "root";
+    String loginPasswd = "MySQLPassword123";
+    String loginUrl = "jdbc:mysql://localhost:3306/moviedb";
+	Class.forName("com.mysql.jdbc.Driver").newInstance();
+    Connection dbcon = DriverManager.getConnection(loginUrl, loginUser, loginPasswd);
     
     String query = request.getParameter("title");
     String[] qArray = query.trim().split("\\s+");
@@ -161,12 +144,14 @@ try
 			</tr>
 		
 <% 		}
-    	rs2.close();
     }
-    dbcon.close();
-    rs.close();
 }
-catch (Exception e)
+catch(InstantiationException | IllegalAccessException | ClassNotFoundException e)
+{
+	// TODO Auto-generated catch block
+	e.printStackTrace();
+}
+catch (SQLException e)
 {
 	// TODO Auto-generated catch block
 	e.printStackTrace();

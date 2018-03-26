@@ -8,14 +8,11 @@ import java.sql.ResultSet;
 import java.util.Calendar;
 import java.util.Map;
 
-import javax.naming.Context;
-import javax.naming.InitialContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.sql.DataSource;
 
 import com.test.User;
 
@@ -42,7 +39,9 @@ public class CheckOut extends HttpServlet {
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 		response.setContentType("text/html");
         response.getWriter().println("<link rel='stylesheet' href='/project2/styles.css' type='text/css' media='all'/>");       
-
+		String loginUser = "root";
+        String loginPasswd = "MySQLPassword123";
+        String loginUrl = "jdbc:mysql://localhost:3306/moviedb?autoReconnect=true&useSSL=false";
         String firstName = request.getParameter("firstName");
         String lastName = request.getParameter("lastName");
         String exp = request.getParameter("expiration");
@@ -56,21 +55,8 @@ public class CheckOut extends HttpServlet {
         
         try
         {
-        	Context initCtx = new InitialContext();
-            if (initCtx == null)
-                response.getWriter().println("initCtx is NULL");
-
-            Context envCtx = (Context) initCtx.lookup("java:comp/env");
-            if (envCtx == null)
-            	response.getWriter().println("envCtx is NULL");
-
-            // Look up our data source
-            DataSource ds = (DataSource) envCtx.lookup("jdbc/TestDB");
-
-            if (ds == null)
-            	response.getWriter().println("ds is null.");
-
-            Connection dbcon = ds.getConnection();
+        	Class.forName("com.mysql.jdbc.Driver").newInstance();
+            Connection dbcon = DriverManager.getConnection(loginUrl, loginUser, loginPasswd);
             PreparedStatement statement = dbcon.prepareStatement(
             		"SELECT id, firstName, lastName, expiration "
             		+"FROM creditcards "

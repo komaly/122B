@@ -1,19 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-
-<%@page import="java.util.List"%>
-<%@page import="java.util.ArrayList"%>
-<%@page import="java.util.Arrays"%>
-<%@page import="java.sql.PreparedStatement"%>
-<%@page import="java.sql.ResultSet"%>
-<%@page import="java.sql.Connection"%>
-<%@page import="javax.naming.InitialContext"%>
-<%@page import="javax.naming.Context"%>
-<%@page import="javax.sql.DataSource"%>
-<%@page import="java.io.File"%>
-<%@page import="java.io.BufferedWriter"%>
-<%@page import="java.io.FileWriter"%>
-<%@page import="java.io.IOException"%>
+<%@page import="java.sql.*"%>
+<%@page import="com.mysql.jdbc.*"%>
+<%@page import="java.util.*"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -51,7 +40,10 @@
 <%
 try
 {
-	long startTime = System.nanoTime();
+	String loginUser = "root";
+	String loginPasswd = "MySQLPassword123";
+	String loginUrl = "jdbc:mysql://localhost:3306/moviedb?autoReconnect=true&useSSL=false";
+
 	String title = request.getParameter("title");
 	String year = request.getParameter("year");
 	String director = request.getParameter("director");
@@ -63,22 +55,9 @@ try
 		return;
 	}
 	
-	Context initCtx = new InitialContext();
-    if (initCtx == null)
-        response.getWriter().println("initCtx is NULL");
-
-    Context envCtx = (Context) initCtx.lookup("java:comp/env");
-    if (envCtx == null)
-    	response.getWriter().println("envCtx is NULL");
-
-    // Look up our data source
-    DataSource ds = (DataSource) envCtx.lookup("jdbc/TestDB");
-
-    if (ds == null)
-    	response.getWriter().println("ds is null.");
-
-    Connection dbcon = ds.getConnection();
-	
+	Class.forName("com.mysql.jdbc.Driver").newInstance();
+    Connection dbcon = DriverManager.getConnection(loginUrl, loginUser, loginPasswd);
+    
     String query = "Select m.id, m.title, m.year, m.director, GROUP_CONCAT(DISTINCT(g.name)) AS genres_list, GROUP_CONCAT(DISTINCT(s.name)) AS stars_list "
     		+ "from movies as m "
     		+ "inner join genres_in_movies as gm on gm.movieId = m.id "
@@ -161,7 +140,6 @@ try
 	}
     
     ResultSet rs = statement.executeQuery();
-    long endJDBCTime = System.nanoTime();
     
     if (!rs.next())
     {
@@ -227,36 +205,15 @@ try
 		
 		</tr>
 		
-<%
+<% 
     }
-    dbcon.close();
-    rs.close();
-    long endTime = System.nanoTime();
-    long elapsedTime = endTime - startTime;
-    long elapsedJDBCTime = endJDBCTime - startTime;
-
-    File file = new File("log.txt");
-    
-    System.out.println("PATH " + file.getAbsolutePath());
-    if (!file.exists()) {
-    	file.createNewFile();
-    }
-
-    BufferedWriter bw = null;
-    FileWriter fw = null;
-    fw = new FileWriter(file.getAbsoluteFile(), true);
-    bw = new BufferedWriter(fw);
-    bw.write(elapsedTime + " " + elapsedJDBCTime);
-    bw.newLine();
-
-    if (bw != null)
-    	bw.close();
-
-    if (fw != null)
-    	fw.close();
-
 }
-catch(Exception e)
+catch(InstantiationException | IllegalAccessException | ClassNotFoundException e)
+{
+	// TODO Auto-generated catch block
+	e.printStackTrace();
+}
+catch (SQLException e)
 {
 	// TODO Auto-generated catch block
 	e.printStackTrace();

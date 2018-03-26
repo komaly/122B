@@ -3,19 +3,15 @@
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import javax.naming.Context;
-import javax.naming.InitialContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.sql.DataSource;
 
 /**
  * Servlet implementation class BrowseByTitle
@@ -38,6 +34,10 @@ public class BrowseByTitle extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
+		String loginUser = "root";
+        String loginPasswd = "MySQLPassword123";
+        String loginUrl = "jdbc:mysql://localhost:3306/moviedb?autoReconnect=true&useSSL=false";
+
         response.setContentType("text/html"); // Response mime type
 
         response.getWriter().println("<HTML><HEAD><TITLE>Titles</TITLE></HEAD>");
@@ -46,27 +46,15 @@ public class BrowseByTitle extends HttpServlet {
         
         try
         {
-        	Context initCtx = new InitialContext();
-            if (initCtx == null)
-                response.getWriter().println("initCtx is NULL");
-
-            Context envCtx = (Context) initCtx.lookup("java:comp/env");
-            if (envCtx == null)
-            	response.getWriter().println("envCtx is NULL");
-
-            // Look up our data source
-            DataSource ds = (DataSource) envCtx.lookup("jdbc/TestDB");
-
-            if (ds == null)
-            	response.getWriter().println("ds is null.");
-
-            Connection dbcon = ds.getConnection();
-            
-            PreparedStatement statement = dbcon.prepareStatement("Select distinct(substr(title, 1, 1)) as letter " + 
-	        		"from movies " + 
-	        		"order by letter ASC;");
+			Class.forName("com.mysql.jdbc.Driver").newInstance();
+	        Connection dbcon = DriverManager.getConnection(loginUrl, loginUser, loginPasswd);
+	        Statement statement = dbcon.createStatement();
 	        
-	        ResultSet rs = statement.executeQuery();
+	        String query = "Select distinct(substr(title, 1, 1)) as letter " + 
+	        		"from movies " + 
+	        		"order by letter ASC;";
+	        
+	        ResultSet rs = statement.executeQuery(query);
 	        
 	        response.getWriter().println("<div style=\"text-align:center\">");
             response.getWriter().println("<TABLE border>");
@@ -88,10 +76,13 @@ public class BrowseByTitle extends HttpServlet {
 	        		"</a>");
 	        response.getWriter().println("</div>");
 
-	        dbcon.close();
-	        rs.close();
         }
-        catch(Exception e)
+        catch(InstantiationException | IllegalAccessException | ClassNotFoundException e)
+        {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        catch (SQLException e)
         {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

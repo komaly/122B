@@ -7,14 +7,11 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-import javax.naming.Context;
-import javax.naming.InitialContext;
 import javax.servlet.ServletException;
 //import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.sql.DataSource;
 
 import com.google.gson.JsonObject;
 
@@ -37,43 +34,33 @@ public class Login extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	//	String gRecaptchaResponse = request.getParameter("g-recaptcha-response");
+		String gRecaptchaResponse = request.getParameter("g-recaptcha-response");
 ////		System.out.println("gRecapthcaResponse=" + gRecaptchaResponse);
 		JsonObject responseJsonObject = new JsonObject();
-//
-//		boolean valid = VerifyUtils.verify(gRecaptchaResponse);
-//		
-//		if(!valid)
-//		{
-//			responseJsonObject.addProperty("status", "fail");
-//			responseJsonObject.addProperty("message", "Recaptcha is wrong.");
-//			response.getWriter().write(responseJsonObject.toString());
-//			return;
-//		}
+
+		boolean valid = VerifyUtils.verify(gRecaptchaResponse);
+		
+		if(!valid)
+		{
+			responseJsonObject.addProperty("status", "fail");
+			responseJsonObject.addProperty("message", "Recaptcha is wrong.");
+			response.getWriter().write(responseJsonObject.toString());
+			return;
+		}
 //		response.setContentType("application/json");
 //        response.setCharacterEncoding("UTF-8");
-		
+		String loginUser = "root";
+        String loginPasswd = "MySQLPassword123";
+        String loginUrl = "jdbc:mysql://localhost:3306/moviedb?autoReconnect=true&useSSL=false";
         String email = request.getParameter("username");
 		String password = request.getParameter("password");
-		
+        
         try {
-        	Context initCtx = new InitialContext();
-            if (initCtx == null)
-                response.getWriter().println("initCtx is NULL");
+        	Class.forName("com.mysql.jdbc.Driver").newInstance();
 
-            Context envCtx = (Context) initCtx.lookup("java:comp/env");
-            if (envCtx == null)
-            	response.getWriter().println("envCtx is NULL");
-
-            // Look up our data source
-            DataSource ds = (DataSource) envCtx.lookup("jdbc/TestDB");
-
-            if (ds == null)
-            	response.getWriter().println("ds is null.");
-
-            Connection dbcon = ds.getConnection();
-            
-        	PreparedStatement statement = dbcon.prepareStatement("Select email, password,id, firstName,lastName from customers where email = ? and password = ?");
+            Connection dbcon = DriverManager.getConnection(loginUrl, loginUser, loginPasswd);
+            // Declare our statement
+            PreparedStatement statement = dbcon.prepareStatement("Select email, password,id, firstName,lastName from customers where email = ? and password = ?");
             statement.setString(1, email);
             statement.setString(2, password);
 
@@ -83,14 +70,13 @@ public class Login extends HttpServlet {
             if (rs.next()) {
     			// login success:
     			// set this user into the session
-
+            	
             	String name = rs.getString("firstName") + " " + rs.getString("lastName");
     			request.getSession().setAttribute("user", new User(email, rs.getString("id"), name));
     			
     			responseJsonObject.addProperty("status", "success");
     			responseJsonObject.addProperty("message", "success");
     			
-
     			response.getWriter().write(responseJsonObject.toString());    			
             }
             
@@ -123,14 +109,10 @@ public class Login extends HttpServlet {
                 responseJsonObject.addProperty("message", "The username " + email + " and password " + password + " are both incorrect, please try again.");
     			response.getWriter().write(responseJsonObject.toString());
             }
-            
-            dbcon.close();
-            rs.close();
-          
+         
         }
         catch(Exception e){
-        	e.printStackTrace();
-        	response.getWriter().print("error : " + e.getMessage());
+        	response.getWriter().print("error");
         }
        
 	}
