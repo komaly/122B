@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Search for a Movie</title>
+<link rel='stylesheet' href='/project2/styles.css' type='text/css' media='all'/>
+</head>
+<body>
+	<div style="text-align:center">
+	<h1>Use the options below to search for a specific movie.</h1>
+	
+	<form action = "movieList.jsp" method = "get" id = movieInfo>
+		<label><b>Title:</b></label><br>
+		<input type="text" name="title"><br>
+		<label><b>Year:</b></label><br>
+		<input type="number" name="year"><br>
+		<label><b>Director:</b></label><br>
+		<input type="text" name="director"><br>
+		<label><b>Star's Name:</b></label><br>
+		<input type="text" name="starName"><br>
+		<input type="submit" value="Search">
+	</form>
+	
+	<a href="ShoppingCart" title="Checkout">
+   		<button>Checkout</button>
+	</a>
+	</div>
+</body>
+</html>

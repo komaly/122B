@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Add Information to a Movie</title>
+<link rel='stylesheet' href='/project2/styles.css' type='text/css' media='all'/>
+</head>
+<body>
+	<div style="text-align:center">
+	<h1>Please specify a movie id, title, year and director to be inserted into the database.
+	Please also specify a single star from the movie and its genre to be added to the database.</h1>
+	
+	<form action = "AddMovie" method = "get" id = addmovie>
+		<label><b>Title:</b></label><br>
+		<input type="text" name="title"><br>
+		<label><b>Year:</b></label><br>
+		<input type="number" name="year"><br>
+		<label><b>Director:</b></label><br>
+		<input type="text" name="director"><br>
+		<label><b>Star:</b></label><br>
+		<input type="text" name="star"><br>
+		<label><b>Genre:</b></label><br>
+		<input type="text" name="genre"><br>
+		
+		<input type="submit" value="Submit">
+	</form>
+
+	</div>
+</body>
+</html>

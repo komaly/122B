@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert a Star Into Our Database</title>
+<link rel='stylesheet' href='/project2/styles.css' type='text/css' media='all'/>
+</head>
+<body>
+	<div style="text-align:center">
+	<h1>Please specify the name, id, and birth year of the star below. The entry must have 
+	a name for the star and an id, but it isn't necessary to input the stars year of birth.</h1>
+	
+	<form action = "InsertStar" method = "get" id = insertstar>
+		<label><b>Name:</b></label><br>
+		<input type="text" name="name"><br>
+		<label><b>Birth Year:</b></label><br>
+		<input type="number" name="birthyear"><br>
+		
+		<input type="submit" value="Submit">
+	</form>
+
+	</div>
+</body>
+</html>
