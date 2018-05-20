@@ -37,16 +37,16 @@ public class Login extends HttpServlet {
 		String gRecaptchaResponse = request.getParameter("g-recaptcha-response");
 ////		System.out.println("gRecapthcaResponse=" + gRecaptchaResponse);
 		JsonObject responseJsonObject = new JsonObject();
-
-		boolean valid = VerifyUtils.verify(gRecaptchaResponse);
-		
-		if(!valid)
-		{
-			responseJsonObject.addProperty("status", "fail");
-			responseJsonObject.addProperty("message", "Recaptcha is wrong.");
-			response.getWriter().write(responseJsonObject.toString());
-			return;
-		}
+//
+//		boolean valid = VerifyUtils.verify(gRecaptchaResponse);
+//		
+//		if(!valid)
+//		{
+//			responseJsonObject.addProperty("status", "fail");
+//			responseJsonObject.addProperty("message", "Recaptcha is wrong.");
+//			response.getWriter().write(responseJsonObject.toString());
+//			return;
+//		}
 //		response.setContentType("application/json");
 //        response.setCharacterEncoding("UTF-8");
 		String loginUser = "root";

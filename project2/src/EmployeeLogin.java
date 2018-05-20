@@ -39,15 +39,15 @@ public class EmployeeLogin extends HttpServlet {
 //		System.out.println("gRecapthcaResponse=" + gRecaptchaResponse);
 		JsonObject responseJsonObject = new JsonObject();
 
-		boolean valid = VerifyUtils.verify(gRecaptchaResponse);
-		
-		if(!valid)
-		{
-			responseJsonObject.addProperty("status", "fail");
-			responseJsonObject.addProperty("message", "Recaptcha is wrong.");
-			response.getWriter().write(responseJsonObject.toString());
-			return;
-		}
+//		boolean valid = VerifyUtils.verify(gRecaptchaResponse);
+//		
+//		if(!valid)
+//		{
+//			responseJsonObject.addProperty("status", "fail");
+//			responseJsonObject.addProperty("message", "Recaptcha is wrong.");
+//			response.getWriter().write(responseJsonObject.toString());
+//			return;
+//		}
 		
 		String loginUser = "root";
         String loginPasswd = "MySQLPassword123";
