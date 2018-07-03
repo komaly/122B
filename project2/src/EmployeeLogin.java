@@ -36,24 +36,26 @@ public class EmployeeLogin extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String gRecaptchaResponse = request.getParameter("g-recaptcha-response");
-//		System.out.println("gRecapthcaResponse=" + gRecaptchaResponse);
+		System.out.println("gRecapthcaResponse=" + gRecaptchaResponse);
 		JsonObject responseJsonObject = new JsonObject();
 
-//		boolean valid = VerifyUtils.verify(gRecaptchaResponse);
-//		
-//		if(!valid)
-//		{
-//			responseJsonObject.addProperty("status", "fail");
-//			responseJsonObject.addProperty("message", "Recaptcha is wrong.");
-//			response.getWriter().write(responseJsonObject.toString());
-//			return;
-//		}
+		boolean valid = VerifyUtils.verify(gRecaptchaResponse);
+		
+		if(!valid)
+		{
+			responseJsonObject.addProperty("status", "fail");
+			responseJsonObject.addProperty("message", "Recaptcha is wrong.");
+			response.getWriter().write(responseJsonObject.toString());
+			return;
+		}
 		
 		String loginUser = "root";
         String loginPasswd = "MySQLPassword123";
         String loginUrl = "jdbc:mysql://localhost:3306/moviedb?autoReconnect=true&useSSL=false";
         String email = request.getParameter("username");
 		String password = request.getParameter("password");
+		
+        response.setContentType("text/html");   
         
         try {
         	Class.forName("com.mysql.jdbc.Driver").newInstance();

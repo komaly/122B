@@ -35,20 +35,20 @@ public class Login extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String gRecaptchaResponse = request.getParameter("g-recaptcha-response");
-////		System.out.println("gRecapthcaResponse=" + gRecaptchaResponse);
+		System.out.println("gRecapthcaResponse=" + gRecaptchaResponse);
 		JsonObject responseJsonObject = new JsonObject();
-//
-//		boolean valid = VerifyUtils.verify(gRecaptchaResponse);
-//		
-//		if(!valid)
-//		{
-//			responseJsonObject.addProperty("status", "fail");
-//			responseJsonObject.addProperty("message", "Recaptcha is wrong.");
-//			response.getWriter().write(responseJsonObject.toString());
-//			return;
-//		}
-//		response.setContentType("application/json");
-//        response.setCharacterEncoding("UTF-8");
+
+		boolean valid = VerifyUtils.verify(gRecaptchaResponse);
+		
+		if(!valid)
+		{
+			responseJsonObject.addProperty("status", "fail");
+			responseJsonObject.addProperty("message", "Recaptcha is wrong.");
+			response.getWriter().write(responseJsonObject.toString());
+			return;
+		}
+        response.setContentType("text/html");   
+
 		String loginUser = "root";
         String loginPasswd = "MySQLPassword123";
         String loginUrl = "jdbc:mysql://localhost:3306/moviedb?autoReconnect=true&useSSL=false";
