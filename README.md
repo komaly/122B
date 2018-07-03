@@ -35,5 +35,6 @@ and "classta" for the password. Once logged in, the employee has the option of i
 database, inserting a movie into the database, or simply viewing the metadata of all tables in the moviedb
 database.
 
+Both customer and employee login pages implement Recaptcha to verify the user is human.
 
 Created in CS 122B at UCI: Projects in Databases and Web Applications
