@@ -29,7 +29,8 @@ date. The transaction is now completed, and the sales tables in the database has
 new sale.
 
 The site also has an employee page where employees login and make changes to the database.
-To access the employee site, go to: ec2-13-57-13-30.us-west-1.compute.amazonaws.com:8080/project2/_dashboard.html
+To access the employee site, go to: ec2-13-57-13-30.us-west-1.compute.amazonaws.com:8080/project2/_dashboard.html,
+or click the "Employee Login" button on the bottom right of the customer login page.
 Then type in the login information for an employee. For example, type in "classta@email.edu" for the username
 and "classta" for the password. Once logged in, the employee has the option of inserting a star into the 
 database, inserting a movie into the database, or simply viewing the metadata of all tables in the moviedb
