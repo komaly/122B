@@ -41,7 +41,7 @@ public class BrowseByTitle extends HttpServlet {
         response.setContentType("text/html"); // Response mime type
 
         response.getWriter().println("<HTML><HEAD><TITLE>Titles</TITLE></HEAD>");
-        response.getWriter().println("<BODY><H1>Pick a letter or number to view titles that start with it.</H1>");
+        response.getWriter().println("<BODY><H1 style = 'text-align: center; color:white;'>Browse By Title</H1>");
         response.getWriter().println("<link rel='stylesheet' href='/project2/styles.css' type='text/css' media='all'/>");
         
         try
@@ -57,23 +57,30 @@ public class BrowseByTitle extends HttpServlet {
 	        ResultSet rs = statement.executeQuery(query);
 	        
 	        response.getWriter().println("<div style=\"text-align:center\">");
-            response.getWriter().println("<TABLE border>");
+            response.getWriter().println("<TABLE border align= 'center' width = '1000'>");
 
             response.getWriter().println("<tr>");
 	        while (rs.next()){
 	        	String letter = rs.getString("letter");
-        		response.getWriter().println("<td>  ");
-	        	response.getWriter().println("<a href='browseByTitle.jsp?letter=" + letter + "'>" + letter + "</a>");
-	        	response.getWriter().println("  </td>");
-
-	        	
+	        	if (letter.matches("[a-zA-Z]+"))
+	        	{
+	        		response.getWriter().println("<td style= 'text-align: center;'>");
+		        	response.getWriter().println("<a href='browseByTitle.jsp?letter=" + letter + "'>" + letter + "</a>");
+		        	response.getWriter().println("  </td>");
+	        	}
 	        }
 	        response.getWriter().println("</tr>");
 	        
 	        response.getWriter().println("</TABLE border>");
-	        response.getWriter().println("<a href=\"ShoppingCart\" title=\"Checkout\">" + 
-	        		" <button style=\"height:25px;width:100px\">Checkout</button>" + 
-	        		"</a>");
+	        response.getWriter().println("<div style='position:relative;float: right;bottom:0px;right:0px;'>"
+	        		+ "<a href='index.html' title='back'>"
+	        		+ "<button class='btn btn-light'>Back To Main Page</button>"
+	        		+ "</a>"
+	        		+ "<a href='ShoppingCart' title='Checkout'>"
+	        		+ "<button class=\"btn btn-light\" >Checkout</button>"
+	        		+ "</a>"
+	        		+ "</div>");
+	    	
 	        response.getWriter().println("</div>");
 
         }

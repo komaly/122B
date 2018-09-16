@@ -2,8 +2,12 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>Fablix Main Page</title>
+	<title>Fabflix Main Page</title>
 	
+	<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	
+	<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 	<link rel='stylesheet' href='/project2/styles.css' type='text/css' media='all'/>
 	
 	<!-- Using jQuery -->
@@ -11,33 +15,48 @@
 	
 	<!-- include jquery autocomplete JS  -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.devbridge-autocomplete/1.4.7/jquery.autocomplete.min.js"></script>
-
+	<style>
+		#main .container #main-row #main-column #main-box {
+		  margin-top: 120px;
+		  max-width: 600px;
+		  height: 320px;
+		  border: 1px solid #9C9C9C;
+		  background-color: #EAEAEA;
+		}
+	</style>
 </head>
 <body>
-	<div style="text-align:center">
-	<h1>Welcome to Fablix!</h1>
-	<h2>If you would like to search for movies, please click "Search". 
-	If you would like to browse for movies, please click "Browse".</h2>
-	
-	<a href="search.html" title="Search">
-   		<button style="height:25px;width:100px">Search</button>
-	</a>
-
-	<a href="browse.html" title="Browse">
-   		<button style="height:25px;width:100px">Browse</button>
-	</a>
-	
-	<a href="ShoppingCart" title="Checkout">
-   		<button style="height:25px;width:100px">Checkout</button>
-	</a>
+	<div id = "main">
+		<div class = "container">
+			<div id="main-row" class="row justify-content-center align-items-center">
+				<div id="main-column" class="col-md-6">
+					<div id="main-box" class="col-md-12">
+						<h1 style= "font-size:70px" class="text-center text-info pt-5">Fabflix</h1>
+						
+						<div class = "text-center form-group">
+							<input type="text" name="title" id="autocomplete"/>
+							<input type="button" class="btn btn-info" value="Search" onclick= doNormalSearch()>
+					    	<script src="index.js"></script>
+						</div>
+						
+						<div class = "text-center form-group">
+							<a href="search.html" title="Search">
+						   		<button class="btn btn-info">Advanced Search</button>
+							</a>
+							
+							<a href="browse.html" title="Browse">
+						   		<button class="btn btn-info">Browse</button>
+							</a>
+						
+							<a href="ShoppingCart" title="Checkout">
+						   		<button class="btn btn-info">Checkout</button>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
-		<input type="text" name="title" id="autocomplete"/>
-		<input type="button" value="Execute" onclick= doNormalSearch()>
-    	<script src="index.js"></script>
-	
-	
-    
- 
     
 </body>
 </html>

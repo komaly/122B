@@ -2,30 +2,61 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Employee Login to Fablix</title>
-<style>
-body{
-	background-color: powderblue;
-}
-</style>
+<title>Employee Login to Fabflix</title>
 <script src='https://www.google.com/recaptcha/api.js'></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<style>
+	body {
+	  margin: 0;
+	  padding: 0;
+	  background-color: #17A2B8 !important;
+	  height: 100vh;
+	}
+	#login .container #login-row #login-column #login-box {
+	  margin-top: 120px;
+	  max-width: 600px;
+	  height: 320px;
+	  border: 1px solid #9C9C9C;
+	  background-color: #EAEAEA;
+	}
+	#login .container #login-row #login-column #login-box #login-form {
+	  padding: 20px;
+	}
+</style>
 </head>
 <body>
-	<div style="text-align:center">
-	<h1>Employee Login to Fablix</h1>
-	<!-- Set the method to POST to avoid username/password showing on URL
-		 Disable the default action because our JS function will handle it. -->
-	<h2>Please enter your username and password</h2>
-	<form id="employee_login_form" method="post" action="#">
-	    <label><b>Username</b></label>
-	    <input type="text" placeholder="Enter Username" name="username">
-		<br>
-	    <label><b>Password</b></label>
-	    <input type="password" placeholder="Enter Password" name="password">
-		<br>
-	    <input type="submit" value="Login">
-	<div class="g-recaptcha" data-sitekey="6Lfi-2EUAAAAAOO4DHFlVY0vPR-yDUtVofnAbp_b"></div>
-	</form>
+	<div id = "login">
+		<h1 class="text-center text-white pt-5">Welcome to the Employee Dashboard of Fabflix</h1>
+		<div class = "container">
+			<div id="login-row" class="row justify-content-center align-items-center">
+				<div id="login-column" class="col-md-6">
+					<div id="login-box" class="col-md-12">
+						<form id="employee_login_form" method="post" action="#">
+							<h3 class="text-center text-info">Login</h3>
+						    <div class="form-group">
+                                <label for="username" class="text-info">Username:</label><br>
+                                <input type="text" name="username" id="username" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="password" class="text-info">Password:</label><br>
+                                <input type="password" name="password" id="password" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" name="submit" class="btn btn-info btn-md" value="Login">
+                            </div>
+                            <div class="form-group">
+                            	<div class="g-recaptcha" data-sitekey="6Lfi-2EUAAAAAOO4DHFlVY0vPR-yDUtVofnAbp_b" style = "float:right; margin-top:-35px"></div>
+                            </div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	
+	
 	</div>
 	
 	<div id="employee_login_error_message"></div>
@@ -34,6 +65,10 @@ body{
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<!-- include our own JS file -->
 	<script src="./employeelogin.js"></script>
+	
+	<a href = login.html title = "CustomerLogin">
+		<button class = "btn btn-light" style="position:relative;float: right;bottom:0px;right:0px;z-index:999">Customer Login</button>
+	</a>
 	
 </body>
 </html>

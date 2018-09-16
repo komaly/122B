@@ -2,28 +2,49 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Add Information to a Movie</title>
+<title>Insert a Movie Into the Database</title>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <link rel='stylesheet' href='/project2/styles.css' type='text/css' media='all'/>
+
+<style>
+	#search .container #search-row #search-column #search-box {
+	  margin-top: 120px;
+	  max-width: 600px;
+	  height: 515px;
+	  border: 1px solid #9C9C9C;
+	  background-color: #EAEAEA;
+	}
+</style>
 </head>
 <body>
-	<div style="text-align:center">
-	<h1>Please specify a movie id, title, year and director to be inserted into the database.
-	Please also specify a single star from the movie and its genre to be added to the database.</h1>
-	
-	<form action = "AddMovie" method = "get" id = addmovie>
-		<label><b>Title:</b></label><br>
-		<input type="text" name="title"><br>
-		<label><b>Year:</b></label><br>
-		<input type="number" name="year"><br>
-		<label><b>Director:</b></label><br>
-		<input type="text" name="director"><br>
-		<label><b>Star:</b></label><br>
-		<input type="text" name="star"><br>
-		<label><b>Genre:</b></label><br>
-		<input type="text" name="genre"><br>
-		
-		<input type="submit" value="Submit">
-	</form>
+	<div id = "search">
+		<div class = "container">
+			<div id="search-row" class="row justify-content-center align-items-center">
+				<div id="search-column" class="col-md-6">
+					<div id="search-box" class="col-md-12">
+						<h1 class="text-center text-info pt-5">Insert a Movie Into The Database</h1>
+						
+						<form action = "AddMovie" method = "get" id = addmovie style="text-align:center;">
+							<label><b>Title:</b></label><br>
+							<input type="text" name="title"><br>
+							<label><b>Year:</b></label><br>
+							<input type="number" name="year"><br>
+							<label><b>Director:</b></label><br>
+							<input type="text" name="director"><br>
+							<label><b>Star:</b></label><br>
+							<input type="text" name="star"><br>
+							<label><b>Genre:</b></label><br>
+							<input type="text" name="genre"><br>
+							
+							<input type="submit" class="btn btn-info" value="Submit">
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
 
 	</div>
 </body>

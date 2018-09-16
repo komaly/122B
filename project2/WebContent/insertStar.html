@@ -2,23 +2,43 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert a Star Into Our Database</title>
+<title>Insert a Star Into the Database</title>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <link rel='stylesheet' href='/project2/styles.css' type='text/css' media='all'/>
+
+<style>
+	#search .container #search-row #search-column #search-box {
+	  margin-top: 120px;
+	  max-width: 600px;
+	  height: 400px;
+	  border: 1px solid #9C9C9C;
+	  background-color: #EAEAEA;
+	}
+</style>
 </head>
 <body>
-	<div style="text-align:center">
-	<h1>Please specify the name, id, and birth year of the star below. The entry must have 
-	a name for the star and an id, but it isn't necessary to input the stars year of birth.</h1>
-	
-	<form action = "InsertStar" method = "get" id = insertstar>
-		<label><b>Name:</b></label><br>
-		<input type="text" name="name"><br>
-		<label><b>Birth Year:</b></label><br>
-		<input type="number" name="birthyear"><br>
-		
-		<input type="submit" value="Submit">
-	</form>
-
+	<div id = "search">
+		<div class = "container">
+			<div id="search-row" class="row justify-content-center align-items-center">
+				<div id="search-column" class="col-md-6">
+					<div id="search-box" class="col-md-12">
+						<h1 class="text-center text-info pt-5">Insert the Star's Information</h1>
+						
+						<form action = "InsertStar" method = "get" id = insertstar style="text-align:center;">
+							<label><b>Name:</b></label><br>
+							<input type="text" name="name"><br>
+							<label><b>Birth Year:</b></label><br>
+							<input type="number" name="birthyear"><br>
+							
+							<input type="submit" class="btn btn-info" value="Submit">
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 </body>
 </html>

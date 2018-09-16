@@ -1,5 +1,5 @@
 
-
+import java.util.*;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -38,8 +38,8 @@ public class BrowseByGenre extends HttpServlet {
         String loginUrl = "jdbc:mysql://localhost:3306/moviedb?autoReconnect=true&useSSL=false";
         response.setContentType("text/html"); // Response mime type
 
-        response.getWriter().println("<HTML><HEAD><TITLE>List of Genres</TITLE></HEAD>");
-        response.getWriter().println("<BODY><H1>Genre List</H1>");
+        response.getWriter().println("<HTML><HEAD><TITLE>Genres</TITLE></HEAD>");
+        response.getWriter().println("<BODY><H1 style = 'text-align: center; color:white;'>Browse By Genre</H1>");
         response.getWriter().println("<link rel='stylesheet' href='/project2/styles.css' type='text/css' media='all'/>");
         
         try
@@ -51,19 +51,33 @@ public class BrowseByGenre extends HttpServlet {
 	        String query = "Select name from genres;";
 	        ResultSet rs = statement.executeQuery(query);
 	        
-            response.getWriter().println("<TABLE border>");
+            response.getWriter().println("<TABLE border align= 'center' width = '350'>");
+            ArrayList<String> visited = new ArrayList<String>();
 
 	        while (rs.next()){
 	        	String genre = rs.getString("name");
-	        	response.getWriter().println("<tr>" + "<td>");
-	        	response.getWriter().println("<a href='browseByGenre.jsp?genre=" + genre + "'> " + genre + "</a>");
-	        	response.getWriter().println("</tr>" + "</td>");
+	        	if (!visited.contains(genre))
+	        	{
+	        		response.getWriter().println("<tr>" + "<td style= 'text-align: center;'>");
+		        	response.getWriter().println("<a href='browseByGenre.jsp?genre=" + genre + "'> " + genre + "</a>");
+		        	response.getWriter().println("</tr>" + "</td>");
+		        	
+		        	visited.add(genre);
+	        	}
+	        	
+	        	
 	        }
 	        
 	        response.getWriter().println("</TABLE border>");
-	        response.getWriter().println("<a href=\"ShoppingCart\" title=\"Checkout\">" + 
-	        		" <button style=\"height:25px;width:100px\">Checkout</button>" + 
-	        		"</a>");
+	        
+	        response.getWriter().println("<div style='position:relative;float: right;bottom:0px;right:0px;'>"
+	        		+ "<a href='index.html' title='back'>"
+	        		+ "<button class='btn btn-light'>Back To Main Page</button>"
+	        		+ "</a>"
+	        		+ "<a href='ShoppingCart' title='Checkout'>"
+	        		+ "<button class=\"btn btn-light\" >Checkout</button>"
+	        		+ "</a>"
+	        		+ "</div>");
         }
         catch(InstantiationException | IllegalAccessException | ClassNotFoundException e)
         {

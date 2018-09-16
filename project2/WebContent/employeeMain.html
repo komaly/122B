@@ -2,28 +2,52 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>Fablix Employee Main Page</title>
-<link rel='stylesheet' href='/project2/styles.css' type='text/css' media='all'/>
+	<title>Fabflix Employee Main Page</title>
+	<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	
+	<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+	<link rel='stylesheet' href='/project2/styles.css' type='text/css' media='all'/>
+	
+	<style>
+		#search .container #search-row #search-column #search-box {
+		  margin-top: 120px;
+		  max-width: 600px;
+		  height: 400px;
+		  border: 1px solid #9C9C9C;
+		  background-color: #EAEAEA;
+		}
+	</style>
 </head>
 <body>
-	<div style="text-align:center">
-	<h1>Welcome to the Employee Main Page for Fablix!</h1>
-	<h2>If you would like to insert a star into the database, please click "Insert Star". 
-	If you would like to view the metadata of our database, please click "View Data".
-	If you would like to add information to a movie, please click "Add Movie Information".</h2>
-	
-	<a href="insertStar.html" title="InsertStar">
-   		<button style="height:35px;width:100px">Insert Star</button>
-	</a>
-
-	<a href="ViewMetaData" title="ViewData">
-   		<button style="height:35px;width:100px">View Data</button>
-	</a>
-	
-	<a href="addmovie.html" title="AddMovieInformation">
-   		<button style="height:35px;width:150px">Add Movie Information</button>
-	</a>
-
+	<div id = "search">
+		<div class = "container">
+			<div id="search-row" class="row justify-content-center align-items-center">
+				<div id="search-column" class="col-md-6">
+					<div id="search-box" class="col-md-12">
+						<h1 class="text-center text-info pt-5">Fabflix Employee Dashboard</h1>
+				
+						<div class="form-group" style = "text-align:center">
+							<a href="ViewMetaData" title="ViewData">
+						   		<button class="btn btn-info">View MetaData</button>
+							</a>
+						</div>
+						
+						<div class="form-group" style = "text-align:center">
+							<a href="insertStar.html" title="InsertStar">
+						   		<button class="btn btn-info">Insert a Star Into the Database</button>
+							</a>
+						</div>
+							
+						<div class="form-group" style = "text-align:center">
+							<a href="addmovie.html" title="AddMovieInformation">
+						   		<button class="btn btn-info">Add a Movie to the Database</button>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 </body>
 </html>

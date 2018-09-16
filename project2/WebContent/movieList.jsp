@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Movie List</title>
+<title>Showing Results</title>
 <!-- DataTables CSS -->
 <link rel="stylesheet" type="text/css" href="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/css/jquery.dataTables.css">
  
@@ -19,10 +19,21 @@
 <script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/jquery.dataTables.min.js"></script>	
 
 <link rel='stylesheet' href='/project2/styles.css' type='text/css' media='all'/>
+<style>
+	#ml .container h1{
+		display: inline-block;
+	 	border: 1px solid #9C9C9C;
+		background-color: #EAEAEA;
+	}
+</style>
 
 </head>
 <body>
-<h1>Movie List</h1>
+<div id = "ml">
+	<div class = "container">
+		<h1 style="color:#17A2B8;">Results</h1>
+	</div>
+</div>
 
 <table border="2" id = movielist>
 <thead>
@@ -186,7 +197,10 @@ try
 			List<String> starsNames = Arrays.asList(stars_list.split("\\s*,\\s*"));
 			for (int i = 0; i < starsNames.size(); i++)
 			{
-				toPrint += ("<a href = 'singlestar.jsp?starName=" + starsNames.get(i) + "'> " + starsNames.get(i) + ", </a>");
+				if (i != starsNames.size() - 1)
+					toPrint += ("<a href = 'singlestar.jsp?starName=" + starsNames.get(i) + "'> " + starsNames.get(i) + ", </a>");
+				else
+					toPrint += ("<a href = 'singlestar.jsp?starName=" + starsNames.get(i) + "'> " + starsNames.get(i) + " </a>");
 			}
 		%>
 		<%=toPrint %>
@@ -223,13 +237,14 @@ catch (SQLException e)
 
 </table>
 
-<a href="ShoppingCart" title="Checkout">
-   		<button style="height:25px;width:100px">Checkout</button>
-</a>
-
-<a href="index.html" title="back">
-  		<button style="height:35px;width:100px">Back To Main Page</button>
-</a>
+<div style="position:relative;float: right;bottom:0px;right:0px;" >
+	<a href="index.html" title="back">
+	  		<button class="btn btn-light">Back To Main Page</button>
+	</a>
+	<a href="ShoppingCart" title="Checkout">
+	   		<button class="btn btn-light" >Checkout</button>
+	</a>
+</div>
 
 <script>
        $(function () {

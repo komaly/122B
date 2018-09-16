@@ -111,8 +111,14 @@ public class CheckOut extends HttpServlet {
         		}
         		
             	
-            	response.getWriter().println("<BODY><div style=\'text-align:center\'><H1>Confirmation Page</H1>");
-            	response.getWriter().println("<H2>Your order has been placed. Thank you for shopping with us!</H2></div>");
+            	response.getWriter().println("<BODY><div style=\'text-align:center; color: white;\'><H1>Confirmation Page</H1>");
+            	response.getWriter().println("<H2 style=\'text-align:center; color: white;\'>Your order has been placed. Thank you for shopping with us!</H2></div>");
+            
+            	response.getWriter().println("<div style='text-align: center'>"
+    	        		+ "<a href='index.html' title='back'>"
+    	        		+ "<button class='btn btn-light'>Main Page</button>"
+    	        		+ "</a>"
+    	        		+ "</div>");
             }
             
             else

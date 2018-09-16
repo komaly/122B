@@ -88,13 +88,13 @@ public class AddMovie extends HttpServlet {
              cs.executeUpdate();
              
  	         response.getWriter().println("<div style=\"text-align:center\">");
-             response.getWriter().println("<H1>Congratulations! The following entry has been added to the database:</H1>");
+             response.getWriter().println("<H1 style = 'text-align: center; color: white'>The following entry has been added to the database:</H1>");
              PreparedStatement statement = dbcon.prepareStatement("SELECT * FROM movies WHERE title = ? and year = ? and director = ?");
              statement.setString(1, title);
              statement.setString(2, year);
              statement.setString(3, director);
              ResultSet rs = statement.executeQuery();
-             response.getWriter().println("<TABLE border>");
+             response.getWriter().println("<TABLE border align = 'center'>");
              response.getWriter().println("<tr>" + "<td>" + "Title" + "</td>" + "<td>" + "Year"
  	        		+ "</td>" + "<td>" + "Director" + "</td>" + "<td>" + "ID" + "</td>" + "<td>" 
             		 + "Star" + "</td>" + "<td>" + "Genre" + "</td>" + "</tr>");
@@ -112,7 +112,7 @@ public class AddMovie extends HttpServlet {
              
  	         response.getWriter().println("</div>");
  	        response.getWriter().println("<a href='employeeMain.html' title='EmployeeMain'>"
-               		+ "<button style='height:35px;width:100px'>Back to Main Page</button>"
+               		+ "<button style='height:35px;width:100px;position:relative;float: right;bottom:0px;right:0px;z-index:999'>Back to Main Page</button>"
                		+ "</a>");
 
              

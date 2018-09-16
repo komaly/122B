@@ -1,29 +1,50 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
-<title>Search for a Movie</title>
-<link rel='stylesheet' href='/project2/styles.css' type='text/css' media='all'/>
+	<meta charset="ISO-8859-1">
+	<title>Search for a Movie</title>
+	<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	
+	<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+	<link rel='stylesheet' href='/project2/styles.css' type='text/css' media='all'/>
+	
+	<style>
+		#search .container #search-row #search-column #search-box {
+		  margin-top: 120px;
+		  max-width: 600px;
+		  height: 400px;
+		  border: 1px solid #9C9C9C;
+		  background-color: #EAEAEA;
+		}
+	</style>
 </head>
 <body>
-	<div style="text-align:center">
-	<h1>Use the options below to search for a specific movie.</h1>
-	
-	<form action = "movieList.jsp" method = "get" id = movieInfo>
-		<label><b>Title:</b></label><br>
-		<input type="text" name="title"><br>
-		<label><b>Year:</b></label><br>
-		<input type="number" name="year"><br>
-		<label><b>Director:</b></label><br>
-		<input type="text" name="director"><br>
-		<label><b>Star's Name:</b></label><br>
-		<input type="text" name="starName"><br>
-		<input type="submit" value="Search">
-	</form>
-	
-	<a href="ShoppingCart" title="Checkout">
-   		<button>Checkout</button>
-	</a>
+	<div id = "search">
+		<div class = "container">
+			<div id="search-row" class="row justify-content-center align-items-center">
+				<div id="search-column" class="col-md-6">
+					<div id="search-box" class="col-md-12">
+						<h1 class="text-center text-info pt-5">Advanced Search</h1>
+						<form action = "movieList.jsp" method = "get" id = movieInfo style="text-align:center;">
+							<label><b>Title:</b></label>
+							<input type="text" name="title"><br>
+							<label><b>Year:</b></label>
+							<input type="number" name="year"><br>
+							<label><b>Director:</b></label>
+							<input type="text" name="director"><br>
+							<label><b>Star's Name:</b></label>
+							<input type="text" name="starName"><br>
+							<input type="submit" class="btn btn-info" value="Search">
+						</form>
+						
+						<a href="ShoppingCart" title="Checkout">
+					   		<button style = "float: right;  margin-top:60px" class="btn btn-info">Checkout</button>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 </body>
 </html>

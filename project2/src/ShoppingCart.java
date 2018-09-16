@@ -42,19 +42,21 @@ public class ShoppingCart extends HttpServlet {
 		
 		if (cart.size() == 0)
 		{
-			response.getWriter().println("<BODY><H1>There are currently no items in your shopping cart."
+			response.getWriter().println("<BODY><H1 style = 'text-align: center; color:white;'>There are currently no items in your shopping cart."
 					+ " Please click 'Back' to return to the home page and add items to your cart.</H1>");
 			
+			response.getWriter().println("<div style=\"text-align:center\">");
 			response.getWriter().println("<a href='index.html' title='Back'>"
-			   		+ "<button style='height:25px;width:100px'>Back</button>"
+			   		+ "<button class='btn btn-light'>Back</button>"
 			   		+ "</a>");
+			response.getWriter().println("</div>");
 			
 			return;
 		}
 			
-	    response.getWriter().println("<BODY><H1>All Movies Currently in Your Cart</H1>");
+	    response.getWriter().println("<BODY><H1 style = 'text-align: center; color:white;'>All Movies Currently in Your Cart</H1>");
 		response.getWriter().println("<div style=\"text-align:center\">");
-        response.getWriter().println("<TABLE border>");
+        response.getWriter().println("<TABLE border align= 'center'>");
 		
         response.getWriter().println("<tr>" + "<td>" + "Movie" + "</td>" + "<td>" + "Quantity"
         		+ "</td>" + "<td>" + "" + "</td>" + "</tr>");
@@ -76,7 +78,7 @@ public class ShoppingCart extends HttpServlet {
 		
 		response.getWriter().println("</TABLE border>");
 		
-		response.getWriter().println("<H2>If you would like to proceed to check out, please click 'Check Out'."
+		response.getWriter().println("<H2 style = 'text-align: center; color:white;'>If you would like to proceed to check out, please click 'Check Out'."
 				+ " If you would like to continue shopping, please click 'Back'.</H2>");
 		
 		response.getWriter().println("<a href='checkout.html' title='Checkout'>"
