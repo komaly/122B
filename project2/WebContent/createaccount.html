@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="ISO-8859-1">
+		<title>Create Account</title>
+		<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+		<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+	
+		<style>
+			body {
+			  margin: 0;
+			  padding: 0;
+			  background-color: #17A2B8 !important;
+			  height: 100vh;
+			}
+			#create .container #create-row #create-column #create-box {
+			  margin-top: 40px;
+			  max-width: 600px;
+			  height: 470px;
+			  border: 1px solid #9C9C9C;
+			  background-color: #EAEAEA;
+			}
+			#create .container #create-row #create-column #create-box #create-form {
+			  padding: 20px;
+			}
+		</style>
+	
+	</head>
+	
+	<body>
+		<div id = "create">
+			<h1 class="text-center text-white pt-5">Create a New Account</h1>
+			<div class = "container">
+				<div id="create-row" class="row justify-content-center align-items-center">
+					<div id="create-column" class="col-md-6">
+						<div id="create-box" class="col-md-12">
+							<form method="get" action="addCreditCard.jsp" class = "form">
+	                                <label for="username" class="text-info">First Name:</label><br>
+	                                <input type="text" name="fname" id="fname" class="form-control">
+	                                
+	                                <label for="username" class="text-info">Last Name:</label><br>
+	                                <input type="text" name="lname" id="lname" class="form-control">
+	                                
+	                                <label for="username" class="text-info">Address:</label><br>
+	                                <input type="text" name="address" id="address" class="form-control">
+	                                
+	                                <label for="username" class="text-info">Email:</label><br>
+	                                <input type="text" name="username" id="username" class="form-control">
+	                                
+	                                <label for="password" class="text-info">Password:</label><br>
+	                                <input type="password" name="password" id="password" class="form-control">
+	                                
+	                                <label for="password" class="text-info">Re-enter Password:</label><br>
+	                                <input type="password" name="password2" id="password2" class="form-control">
+	                                <div class="form-group">
+	                                	<input type="submit" name="submit" class="btn btn-info btn-md" value="Submit">
+									</div>
+							</form>
+						</div>
+					</div>
+				</div>	
+			</div>
+		</div>
+	</body>
+</html>

@@ -74,7 +74,8 @@ public class LoginFilter implements Filter {
 		if (requestURI.endsWith("login.html") || requestURI.endsWith("login.js") 
 				|| requestURI.endsWith("login") || requestURI.endsWith("like-predicate.jsp")
 				|| requestURI.endsWith("_dashboard.html") || requestURI.endsWith("employeelogin.js")
-				||  requestURI.endsWith("employeeMain.html")) {
+				||  requestURI.endsWith("employeeMain.html") || requestURI.endsWith("createaccount.html")
+				|| requestURI.endsWith("createaccount.jsp") || requestURI.endsWith("addcreditcard.jsp")) {
 			return true;
 		}
 		return false;

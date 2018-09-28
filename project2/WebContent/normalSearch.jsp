@@ -53,7 +53,7 @@ try
 {
 	String loginUser = "root";
     String loginPasswd = "MySQLPassword123";
-    String loginUrl = "jdbc:mysql://localhost:3306/moviedb";
+    String loginUrl = "jdbc:mysql://localhost:3306/moviedb?autoReconnect=true&useSSL=false";
 	Class.forName("com.mysql.jdbc.Driver").newInstance();
     Connection dbcon = DriverManager.getConnection(loginUrl, loginUser, loginPasswd);
     
@@ -61,7 +61,7 @@ try
     String[] qArray = query.trim().split("\\s+");
     
     String s = "select * from movietitles "
-    		+ "where MATCH(titles) AGAINST('"; 
+    		+ "where MATCH(title) AGAINST('"; 
     
     for (int i = 0; i < qArray.length; i++)
     {
@@ -96,7 +96,7 @@ try
     
     
     while (rs.next()){
-    	statement2.setString(1, rs.getString("titles"));
+    	statement2.setString(1, rs.getString("title"));
     	rs2 = statement2.executeQuery();
     	
     	while (rs2.next())
@@ -181,6 +181,9 @@ catch (SQLException e)
 	</a>
 	<a href="index.html" title="back">
 	  		<button class="btn btn-light">Back To Main Page</button>
+	</a>
+	<a href = "logout.jsp">
+		<button class = "btn btn-light">Logout</button>
 	</a>
 </div>
 

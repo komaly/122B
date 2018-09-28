@@ -79,15 +79,19 @@ public class ShoppingCart extends HttpServlet {
 		response.getWriter().println("</TABLE border>");
 		
 		response.getWriter().println("<H2 style = 'text-align: center; color:white;'>If you would like to proceed to check out, please click 'Check Out'."
-				+ " If you would like to continue shopping, please click 'Back'.</H2>");
+				+ " If you would like to continue shopping, please click 'Back', or if you would like to exit, please click 'Logout'. </H2>");
 		
 		response.getWriter().println("<a href='checkout.html' title='Checkout'>"
-		   		+ "<button style='height:25px;width:100px'>Checkout</button>"
+		   		+ "<button class = \"btn btn-light\">Checkout</button>"
 		   		+ "</a>");
 		
 		response.getWriter().println("<a href='index.html' title='Back'>"
-		   		+ "<button style='height:25px;width:100px'>Back</button>"
+		   		+ "<button class = \"btn btn-light\">Back</button>"
 		   		+ "</a>");
+		
+		response.getWriter().println("<a href = 'logout.jsp'> " + 
+				"<button class = \"btn btn-light\">Logout</button>\n" + 
+				"</a>");
 	}
 
 	/**

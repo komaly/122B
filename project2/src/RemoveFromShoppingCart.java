@@ -38,21 +38,21 @@ public class RemoveFromShoppingCart extends HttpServlet {
 		
         response.getWriter().println("<HTML><HEAD><TITLE>Updated Cart</TITLE></HEAD>");
 		response.getWriter().println("<BODY><H1 style = 'text-align: center; color:white;'>Your shopping cart has been updated!"
-				+ " Please click 'Search' or 'Browse' to continue looking for movies,"
-				+ " or click 'Checkout' if you have completed your purchase.</H1>");
+				+ " Please click 'Back' to continue looking for movies,"
+				+ " 'Checkout' if you have completed your purchase, or 'Logout' if you wish to exit.</H1>");
 		
 		response.getWriter().println("<div style = 'text-align: center'>");
-		response.getWriter().println("<a href='search.html' title='Search'>"
-   		+ "<button style='height:25px;width:100px'>Search</button>"
-   		+ "</a>");
-
-		response.getWriter().println("<a href='browse.html' title='Browse'>"
-   		+ "<button style='height:25px;width:100px'>Browse</button>"
+		response.getWriter().println("<a href='index.html' title='Back'>"
+   		+ "<button  class=\"btn btn-light\" '>Back</button>"
    		+ "</a>");
 		
 		response.getWriter().println("<a href='ShoppingCart' title='Checkout'>"
-		   		+ "<button style='height:25px;width:100px'>Checkout</button>"
-		   		+ "</a>");		
+		   		+ "<button class = 'btn btn-light'>Checkout</button>"
+		   		+ "</a>");	
+		
+		response.getWriter().println("<a href='logout.jsp' title='Logout'>"
+		   		+ "<button class = 'btn btn-light'>Logout</button>"
+		   		+ "</a>");	
 		response.getWriter().println("</div>");
 	}
 

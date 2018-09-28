@@ -45,7 +45,7 @@ public class MovieSuggestion extends HttpServlet {
         
 			String loginUser = "root";
 	        String loginPasswd = "MySQLPassword123";
-	        String loginUrl = "jdbc:mysql://localhost:3306/moviedb";
+	        String loginUrl = "jdbc:mysql://localhost:3306/moviedb?autoReconnect=true&useSSL=false";
 	        
 			
 			// return the empty json array if query is null or empty
@@ -62,10 +62,10 @@ public class MovieSuggestion extends HttpServlet {
 	        ResultSet rs, rs2;
 	        
 	        String s = "select * from movie_titles_ids "
-	        		+ "where MATCH(titles) AGAINST('"; 
+	        		+ "where MATCH(title) AGAINST('"; 
 	        
 	        String sStars = "select * from stars_names_ids "
-	        		+ "where MATCH(names) AGAINST('"; 
+	        		+ "where MATCH(name) AGAINST('"; 
 	        
 	        for (int i = 0; i < qArray.length; i++)
 	        {
@@ -82,14 +82,14 @@ public class MovieSuggestion extends HttpServlet {
         	
         	while (rs.next()) //for each title and id
         	{
-        		jsonArray.add(generateJsonObject(rs.getString("ids"), rs.getString("titles"), "MOVIES"));
+        		jsonArray.add(generateJsonObject(rs.getString("id"), rs.getString("title"), "MOVIES"));
         	}
         	
         	statement2 = dbcon.prepareStatement(sStars);
         	rs2 = statement2.executeQuery();
         	while (rs2.next()) //for each star and id
         	{
-        		jsonArray.add(generateJsonObject(rs2.getString("ids"), rs2.getString("names"), "STARS"));
+        		jsonArray.add(generateJsonObject(rs2.getString("id"), rs2.getString("name"), "STARS"));
         	}
        
 			
@@ -97,6 +97,7 @@ public class MovieSuggestion extends HttpServlet {
 			return;
 		} catch (Exception e) {
 			System.out.println(e);
+			response.getWriter().write(e.getMessage());
 			response.sendError(500, e.getMessage());
 		}
 	}

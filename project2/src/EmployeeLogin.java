@@ -40,7 +40,6 @@ public class EmployeeLogin extends HttpServlet {
 		JsonObject responseJsonObject = new JsonObject();
 
 		boolean valid = VerifyUtils.verify(gRecaptchaResponse);
-		
 		if(!valid)
 		{
 			responseJsonObject.addProperty("status", "fail");

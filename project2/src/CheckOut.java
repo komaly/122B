@@ -118,6 +118,9 @@ public class CheckOut extends HttpServlet {
     	        		+ "<a href='index.html' title='back'>"
     	        		+ "<button class='btn btn-light'>Main Page</button>"
     	        		+ "</a>"
+    	        		+ "<a href = 'logout.jsp'>"
+    	        		+ "<button class = 'btn btn-light'>Logout</button>"
+    	        		+ "</a>"
     	        		+ "</div>");
             }
             
@@ -136,6 +139,7 @@ public class CheckOut extends HttpServlet {
         catch(Exception e)
         {
         	response.getWriter().print("error");
+        	response.getWriter().println(e.toString());
         }
 	}
 

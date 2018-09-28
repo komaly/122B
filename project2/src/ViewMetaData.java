@@ -190,6 +190,10 @@ public class ViewMetaData extends HttpServlet {
             response.getWriter().println("<a href='employeeMain.html' title='EmployeeMain'>"
                		+ "<button style='height:35px;width:100px;position:relative;float: right;bottom:0px;right:0px;z-index:999'>Back to Main Page</button>"
                		+ "</a>");
+            
+            response.getWriter().println("<a href='employeelogout.jsp' title='EmployeeLogout'>"
+               		+ "<button style='height:35px;width:100px;position:relative;float: right;bottom:0px;right:0px;z-index:999'>Logout</button>"
+               		+ "</a>");
         }
         catch(Exception e)
         {

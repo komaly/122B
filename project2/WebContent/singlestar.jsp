@@ -102,6 +102,9 @@
 	<a href="index.html" title="back">
 	  		<button class="btn btn-light">Back To Main Page</button>
 	</a>
+	<a href = "logout.jsp">
+		<button class = "btn btn-light">Logout</button>
+	</a>
 </div>
 </body>
 </html>

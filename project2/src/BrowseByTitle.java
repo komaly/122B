@@ -79,6 +79,9 @@ public class BrowseByTitle extends HttpServlet {
 	        		+ "<a href='ShoppingCart' title='Checkout'>"
 	        		+ "<button class=\"btn btn-light\" >Checkout</button>"
 	        		+ "</a>"
+	        		+ "<a href = 'logout.jsp'>"
+	        		+ "<button class = 'btn btn-light'>Logout</button>"
+	        		+ "</a>"
 	        		+ "</div>");
 	    	
 	        response.getWriter().println("</div>");
