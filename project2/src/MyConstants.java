@@ -1,6 +1,6 @@
 
 class MyConstants{
-	public static final String SITE_KEY = "6Lc_ZHIUAAAAAIV6k61bixxdQ5-Mo8xL2YmXXfqi";
-	public static final String SECRET_KEY = "6Lc_ZHIUAAAAAF4P02AkgmWvVM97YGeHtfSMWafV";
+	public static final String SITE_KEY = "6LdlP3cUAAAAAEerkafE6DbcrrSVX5pec6-6kK5z";
+	public static final String SECRET_KEY = "6LdlP3cUAAAAAO-ygajkMTKti1TbPj_11Ysar4ak";
 }
 
