@@ -7,7 +7,7 @@ database dubbed "moviedb". Moviedb contains tables with information on credit ca
 employees, movies, genres, genres in movies, stars, stars in movies, ratings, and sales. All initial
 information inserted into the database can be found in the movie-data.sql file.
 
-To access the site, go to: http://ec2-54-67-26-35.us-west-1.compute.amazonaws.com:8080/project2/login.html
+To access the site, go to: http://ec2-13-56-78-21.us-west-1.compute.amazonaws.com:8080/project2/login.html
 . You may create your own account by clicking "Create Account", or you can type in the login information for a specific user in the database, 
 such as the user with "a@email.com" for the username and "a2" for the password. 
 
